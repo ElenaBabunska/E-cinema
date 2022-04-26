@@ -6,7 +6,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                        <tr>
+                        <tr style="color: #0b3954">
                             <th scope="col">Discount name</th>
                             <th scope="col">Discount value</th>
                             <th scope="col">Date of creation</th>
@@ -29,10 +29,8 @@
                                             <i class="fa fa-trash">Delete</i>
                                         </button>
                                     </form>
-                                </th:block>
-                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <a th:href="@{'/discounts/{id}/edit' (id=${discount.getId()})}">
-                                        <button type="submit" class="btn btn-sm btn-info">
+                                        <button type="submit" class="btn btn-sm" style="background-color: #0b3954; color: wheat; margin-top: 5px">
                                             <i class="fa fa-trash">Edit</i>
                                         </button>
                                     </a>
@@ -41,7 +39,7 @@
                                     <form th:action="@{'/tickets/use-discount/{id}' (id=${discount.getId()})}"
                                           th:method="POST">
                                         <button type="submit"
-                                                class="btn btn-info">
+                                                class="btn" style="background-color: #0b3954; color: white">
                                             <i class="fa fa-trash">Use Discount</i>
                                         </button>
                                     </form>
@@ -55,7 +53,7 @@
             <div class="col mb-3">
                 <div class="row">
                     <div class="col-sm-12 col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a href="/discounts/add" class="btn btn-block btn-dark add-product-btn">
+                        <a href="/discounts/add" class="btn btn-block btn-dark add-product-btn" style="font-style: italic">
                             Add new discount
                         </a>
                     </div>

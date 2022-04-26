@@ -97,6 +97,8 @@ public class SubscriptionsController {
         Subscription subscription = this.subscriptionService.findById(id);
         model.addAttribute("subscription",subscription);
         model.addAttribute("users",this.subscriptionService.listUsersInProgram(id));
-        return "users-in-subs";
+
+        model.addAttribute("bodyContent", "users-in-subs");
+        return "master-template";
     }
 }

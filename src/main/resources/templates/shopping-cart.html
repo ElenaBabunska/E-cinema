@@ -1,52 +1,53 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <th:block sec:authorize="hasRole('ROLE_USER')">
+        <section class="jumbotron text-center" style="color: wheat; background-color: #0b3954">
+            <div class="container">
+                <h3 class="jumbotron-heading" style="font-weight: bold; font-size: 40px">Shopping cart for
+                    <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
+                </h3>
+            </div>
+        </section>
 
-
-<th:block xmlns:th="http://www.thymeleaf.org">
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h3 class="jumbotron-heading">Shopping cart for
-                <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
-            </h3>
+        <div th:if="${hasError}">
+            <h5 class="text-center text-danger" th:text="${error}"></h5>
         </div>
-    </section>
 
-    <div th:if="${hasError}">
-        <h5 class="text-center text-danger" th:text="${error}"></h5>
-    </div>
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12" th:if="${tickets.size()} > 0">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr style="color: #0b3954">
+                                <th scope="col">Ticket code</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Movie name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="t : ${tickets}" class="cart-item">
+                                <td th:text="${t.getCode()}"></td>
+                                <td th:text="${t.getDiscountPrice()}"></td>
+                                <td th:text="${t.getMovie().getName()}"></td>
+                                <td class="text-right">
+                                    <th:block sec:authorize="hasRole('ROLE_USER')">
+                                        <form th:action="@{'/shopping-cart/delete/{id}' (id=${t.getCode()})}"
+                                              th:method="DELETE">
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-danger delete-product">
+                                                <i class="fa fa-trash">Delete</i>
+                                            </button>
+                                        </form>
+                                    </th:block>
+                                </td>
+                            </tr>
 
-    <div class="container mb-4">
-        <div class="row">
-            <div class="col-12" th:if="${tickets.size()} > 0">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Ticket code</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Movie name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="t : ${tickets}" class="cart-item">
-                            <td th:text="${t.getCode()}"></td>
-                            <td th:text="${t.getDiscountPrice()}"></td>
-                            <td th:text="${t.getMovie().getName()}"></td>
-                            <td class="text-right">
-                                <th:block sec:authorize="hasRole('ROLE_USER')">
-                                    <form th:action="@{'/shopping-cart/delete/{id}' (id=${t.getCode()})}"
-                                          th:method="DELETE">
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger delete-product">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                    </form>
-                                </th:block>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</th:block>
+    </th:block>
+</div>
+

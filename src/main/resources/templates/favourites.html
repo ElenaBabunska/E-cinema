@@ -1,18 +1,16 @@
 
-
 <div xmlns:th="http://www.thymeleaf.org">
 <th:block sec:authorize="hasRole('ROLE_USER')">
-    <section class="jumbotron text-center">
+    <section class="jumbotron text-center" style="color: wheat; background-color: #0b3954">
         <div class="container">
-            <h1 class="jumbotron-heading">Favorite movies for
+            <h1 class="jumbotron-heading" style="font-weight: bold">Favourite movies for
                 <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
             </h1>
-            <small>E-cinema</small>
         </div>
     </section>
 
     <div th:if="${hasError}">
-        <h5 style="background-image: none;" class="text-center text-danger" th:text="${error}"></h5>
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
     </div>
 
     <div class="container mb-4">
@@ -21,7 +19,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                        <tr>
+                        <tr style="color: #0b3954">
                             <th scope="col">Movie</th>
                             <th scope="col">Description</th>
                             <th scope="col">Director</th>
@@ -53,10 +51,7 @@
         </div>
     </div>
     <div >
-        <div class="container">
-            <a class="btn btn-info" href="/movies">Back</a>
 
-        </div>
     </div>
 </th:block>
 

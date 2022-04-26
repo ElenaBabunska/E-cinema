@@ -1,4 +1,11 @@
-
+<head>
+    <style>
+        .slika{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
 <div xmlns:th="http://www.thymeleaf.org">
     <div class="container">
         <h1 th:if="${hasError}" th:text="${error}"></h1>
@@ -9,7 +16,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                        <tr>
+                        <tr style="color: #0b3954">
                             <th scope="col">Ticket code</th>
                             <th scope="col">Movie name</th>
                             <th scope="col">Price</th>
@@ -25,19 +32,19 @@
                             <td class="text-right">
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <a th:href="@{'/tickets/{id}/edit' (id=${t.getCode()})}"
-                                       class="btn btn-info" >
+                                       class="btn" style="background-color: #0b3954; color: wheat; font-style: italic" >
                                         Edit
                                     </a>
                                 </th:block>
                             </td>
                             <td>
                                 <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${session.subscription} == null">
-                                    <div role="alert" onclick="alert('To buy a ticket you have to subscribe first!');" class="btn btn-info" >Buy</div>
+                                    <div role="alert" onclick="alert('To buy a ticket you have to subscribe first!');" class="btn" style="background-color: #0b3954; color: wheat; font-style: italic" >Buy</div>
                                 </th:block>
 
                                 <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${session.subscription} != null">
                                         <a th:href="@{'/shopping-cart/add/{id}' (id=${t.getCode()})}"
-                                           class="btn btn-info" >
+                                           class="btn" style="background-color: #0b3954; color: wheat; font-style: italic" >
                                             Buy
                                         </a>
                                 </th:block>
@@ -45,7 +52,7 @@
                             <td>
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <a th:href="@{'/tickets/{id}/delete' (id=${t.getCode()})}"
-                                       class="btn btn-danger" >
+                                       class="btn btn-danger" style="font-style: italic">
                                         Delete
                                     </a>
                                 </th:block>
@@ -55,8 +62,8 @@
                     </table>
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                         <a th:href="@{'/tickets/add-form'}"
-                           class="btn btn-info" >
-                            Add
+                           class="btn btn-dark" style="font-style: italic">
+                            Add new ticket
                         </a>
                     </th:block>
                 </div>

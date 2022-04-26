@@ -1,27 +1,85 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Subscriptions</title>
-    <link rel="stylesheet" href="../static/subscription.css">
+
+    <style>
+        div.wrapper {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+            grid-auto-rows: minmax(109px, auto);
+            width: 850px;
+        }
+
+        div .text-center:first-of-type{
+            padding-top: -3px;
+        }
+        .view-users{
+            background-color: wheat;
+            color: #0b3954;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 7px;
+            margin-bottom: 10px;
+        }
+
+        .edit-product{
+            color: wheat;
+            background-color: #0b3954;
+            border-radius: 7px;
+            font-size: 15px;
+            align-content: center;
+            margin-bottom: 10px;
+        }
+
+        .delete-product {
+            font-size: 15px;
+            border-radius: 7px;
+        }
+        .apply{
+            background-color: #0b3954;
+            color: wheat;
+        }
+
+        .card-title {
+            text-transform: uppercase;
+            color: #0b3954;
+            font-weight: bold;
+            padding-top: 35px;
+        }
+        .card-text {
+            color:black;
+            padding-top: 20px;
+        }
+        .price {
+            padding-top: 30px;
+        }
+        .btn-block{
+            border: 2px solid #2676a3;
+            width: 200px;
+            font-size: 15px;
+        }
+
+    </style>
 </head>
 <div class="container">
     <h1 th:if="${hasError}" th:text="${error}"></h1>
 </div>
 <div xmlns:th="http://www.thymeleaf.org" >
 
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center" style="background-color: #0b3954">
         <div class="container">
-            <h1 class="jumbotron-heading">Subscriptions</h1>
+            <h1 class="jumbotron-heading" style="font-weight: bold; color: wheat">Subscriptions</h1>
         </div>
     </div>
 
-    <div class="jumbotron text-center" id="back">
+    <div class="jumbotron text-center" style="background-color: #e7ecef">
         <div class="container " id="box" >
 
             <div class="wrapper row" th:if="${subscriptions.size() > 0}" style="margin-left: 113px;">
                 <div th:each="s : ${subscriptions}" style="
                 width:415px;">
-                    <div class=" row program" style="width: 1000px">
+                    <div class="row" style="width: 1000px">
                         <div class="col-2">
                             <img  class="card-img-top" th:src="${s.getUrl()}"
                                   alt="#" height="100px" width="120px">
@@ -30,7 +88,7 @@
                             <h5  class="card-title" th:text="${s.getName()}"></h5>
                         </div>
                         <div class="col-3">
-                            <p class="card-text" th:text="${s.getDescription()}"></p>
+                            <p class="card-text text-center" th:text="${s.getDescription()}"></p>
                         </div>
                         <div class="col-2">
                             <div class="price">
@@ -40,20 +98,20 @@
                         <div class="col-3">
                             <th:block sec:authorize="hasRole('ROLE_USER')">
                                 <a th:href="@{'/subscriptions/apply/{id}' (id=${s.getId()})}"
-                                   class="btn btn-sm btn-warning">
+                                   class="btn btn-sm apply">
                                     <i class="fa fa-trash " role="alert" onclick="alert('Congratulations! You applied successfully to this subscription');" >Apply</i>
 
                                 </a>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{'/subscriptions/users/{id}' (id=${s.getId()})}"
-                                   class="btn btn-sm btn-warning edit-product">
+                                   class="btn btn-sm  view-users">
                                     <i class="fa fa-trash">View Users</i>
                                 </a>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{'/subscriptions/edit-form/{id}' (id=${s.getId()})}"
-                                   class="btn btn-sm btn-warning edit-product">
+                                   class="btn btn-sm edit-product">
                                     <i class="fa fa-trash">Edit Subscription</i>
                                 </a>
                             </th:block>
@@ -61,7 +119,7 @@
                                 <form th:action="@{'/subscriptions/delete/{id}' (id=${s.getId()})}"
                                       th:method="POST">
                                     <button type="submit"
-                                            class="btn btn-outline-danger delete-product">
+                                            class="btn btn-danger delete-product">
                                         <i class="fa fa-trash">Delete Subscription</i>
                                     </button>
                                 </form>
@@ -72,30 +130,18 @@
                 </div>
 
             </div>
+        </div>
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <div style="margin-left: 700px; margin-bottom: -30px; margin-top: 30px">
+                <a th:href="@{'/subscriptions/add-form'}"
+                   class="btn btn-block btn-dark">
+                    <i class="fa fa-trash">Add new subscription</i>
+                </a>
+            </div>
+        </th:block>
+    </div>
 
-        </div>
-    </div>
-    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-        <div style="    margin-left: 108px;">
-            <a th:href="@{'/subscriptions/add-form'}"
-               class="btn btn-block btn-primary">
-                <i class="fa fa-trash">Add new subscription</i>
-            </a>
-        </div>
-    </th:block>
-    <div class="col mb-3 text-center">
-        <div>
 
-        </div>
-        <div class="text-center">
-            <a href="/home" class="btn btn-outline-primary">Back</a>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="container">
-            <a></a>
-        </div>
-    </div>
 </div>
 
 
