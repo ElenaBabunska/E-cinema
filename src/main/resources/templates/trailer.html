@@ -1,0 +1,32 @@
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div  xmlns:th="http://www.thymeleaf.org" class="container">
+    <div class="text-center" th:if="${session.subscription!=null}">
+        <video width="850" height="600"  muted controls>
+            <source th:src="@{/video/video.mp4}" type="video/mp4">
+            Movie Trailer
+        </video>
+
+    </div>
+    <div id="ss" class="text-center" style="height: 600px; position: relative"
+         th:if="${session.subscription==null}">
+
+        <video width="850" height="600"  muted style="filter: blur(3px)" >
+            <source th:src="@{/video/video.mp4}" type="video/mp4" >
+
+        </video>
+        <h3>To watch this movie you have to buy a ticket first!
+            <div>
+                <a th:href="@{'/tickets'}"
+                   class="btn btn-sm">
+                    <i class="fa fa-trash " role="alert">Buy a ticket</i>
+                </a>
+            </div>
+        </h3>
+
+    </div>
+
+</div>

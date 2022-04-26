@@ -1,0 +1,101 @@
+
+<head>
+    <meta charset="UTF-8">
+    <title>Subscriptions</title>
+    <link rel="stylesheet" href="../static/subscription.css">
+</head>
+<div class="container">
+    <h1 th:if="${hasError}" th:text="${error}"></h1>
+</div>
+<div xmlns:th="http://www.thymeleaf.org" >
+
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Subscriptions</h1>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center" id="back">
+        <div class="container " id="box" >
+
+            <div class="wrapper row" th:if="${subscriptions.size() > 0}" style="margin-left: 113px;">
+                <div th:each="s : ${subscriptions}" style="
+                width:415px;">
+                    <div class=" row program" style="width: 1000px">
+                        <div class="col-2">
+                            <img  class="card-img-top" th:src="${s.getUrl()}"
+                                  alt="#" height="100px" width="120px">
+                        </div>
+                        <div class="col-2">
+                            <h5  class="card-title" th:text="${s.getName()}"></h5>
+                        </div>
+                        <div class="col-3">
+                            <p class="card-text" th:text="${s.getDescription()}"></p>
+                        </div>
+                        <div class="col-2">
+                            <div class="price">
+                                <span class="card-text" th:text="${s.getPrice()}"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <th:block sec:authorize="hasRole('ROLE_USER')">
+                                <a th:href="@{'/subscriptions/apply/{id}' (id=${s.getId()})}"
+                                   class="btn btn-sm btn-warning">
+                                    <i class="fa fa-trash " role="alert" onclick="alert('Congratulations! You applied successfully to this subscription');" >Apply</i>
+
+                                </a>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{'/subscriptions/users/{id}' (id=${s.getId()})}"
+                                   class="btn btn-sm btn-warning edit-product">
+                                    <i class="fa fa-trash">View Users</i>
+                                </a>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{'/subscriptions/edit-form/{id}' (id=${s.getId()})}"
+                                   class="btn btn-sm btn-warning edit-product">
+                                    <i class="fa fa-trash">Edit Subscription</i>
+                                </a>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <form th:action="@{'/subscriptions/delete/{id}' (id=${s.getId()})}"
+                                      th:method="POST">
+                                    <button type="submit"
+                                            class="btn btn-outline-danger delete-product">
+                                        <i class="fa fa-trash">Delete Subscription</i>
+                                    </button>
+                                </form>
+                            </th:block>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <div style="    margin-left: 108px;">
+            <a th:href="@{'/subscriptions/add-form'}"
+               class="btn btn-block btn-primary">
+                <i class="fa fa-trash">Add new subscription</i>
+            </a>
+        </div>
+    </th:block>
+    <div class="col mb-3 text-center">
+        <div>
+
+        </div>
+        <div class="text-center">
+            <a href="/home" class="btn btn-outline-primary">Back</a>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <a></a>
+        </div>
+    </div>
+</div>
+
+

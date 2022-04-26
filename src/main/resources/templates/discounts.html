@@ -1,0 +1,66 @@
+
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Discount name</th>
+                            <th scope="col">Discount value</th>
+                            <th scope="col">Date of creation</th>
+                            <th scope="col">Date of validity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="discount : ${discounts}" class="discount">
+                            <td th:text="${discount.getName()}"></td>
+                            <td th:text="${discount.getValue()}"></td>
+                            <td th:text="${discount.getDateCreated()}"></td>
+                            <td th:text="${discount.getValidUntil()}"></td>
+
+                            <td class="text-right">
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <form th:action="@{'/discounts/{id}/delete' (id=${discount.getId()})}"
+                                          th:method="DELETE">
+                                        <button type="submit"
+                                                class="btn btn-sm btn-danger delete-product">
+                                            <i class="fa fa-trash">Delete</i>
+                                        </button>
+                                    </form>
+                                </th:block>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{'/discounts/{id}/edit' (id=${discount.getId()})}">
+                                        <button type="submit" class="btn btn-sm btn-info">
+                                            <i class="fa fa-trash">Edit</i>
+                                        </button>
+                                    </a>
+                                </th:block>
+                                <th:block sec:authorize="hasRole('ROLE_USER')">
+                                    <form th:action="@{'/tickets/use-discount/{id}' (id=${discount.getId()})}"
+                                          th:method="POST">
+                                        <button type="submit"
+                                                class="btn btn-info">
+                                            <i class="fa fa-trash">Use Discount</i>
+                                        </button>
+                                    </form>
+                                </th:block>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col mb-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a href="/discounts/add" class="btn btn-block btn-dark add-product-btn">
+                            Add new discount
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

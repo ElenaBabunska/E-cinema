@@ -1,0 +1,66 @@
+
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <h1 th:if="${hasError}" th:text="${error}"></h1>
+    </div>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${tickets.size()} > 0">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Ticket code</th>
+                            <th scope="col">Movie name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Discount price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="t : ${tickets}" class="cart-item">
+                            <td th:text="${t.getCode()}"></td>
+                            <td th:text="${t.getMovie() != null} ? ${t.getMovie().getName()} : 'No movie'"></td>
+                            <td th:text="${t.getPrice()}"></td>
+                            <td th:text="${t.getDiscountPrice()}"></td>
+                            <td class="text-right">
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{'/tickets/{id}/edit' (id=${t.getCode()})}"
+                                       class="btn btn-info" >
+                                        Edit
+                                    </a>
+                                </th:block>
+                            </td>
+                            <td>
+                                <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${session.subscription} == null">
+                                    <div role="alert" onclick="alert('To buy a ticket you have to subscribe first!');" class="btn btn-info" >Buy</div>
+                                </th:block>
+
+                                <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${session.subscription} != null">
+                                        <a th:href="@{'/shopping-cart/add/{id}' (id=${t.getCode()})}"
+                                           class="btn btn-info" >
+                                            Buy
+                                        </a>
+                                </th:block>
+                            </td>
+                            <td>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{'/tickets/{id}/delete' (id=${t.getCode()})}"
+                                       class="btn btn-danger" >
+                                        Delete
+                                    </a>
+                                </th:block>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{'/tickets/add-form'}"
+                           class="btn btn-info" >
+                            Add
+                        </a>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

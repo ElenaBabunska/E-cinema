@@ -1,0 +1,21 @@
+.logo {
+    margin-left: -100px;
+}
+section{
+    padding-top: -3px;
+    background-position: center;
+}
+.jumbotron{
+    opacity: 0.9;
+}
+#shopping-cart{
+    text-align: center;
+}
+.slika{
+    width: 20px;
+    height: 20px;
+}
+#navbar1 li{
+    position: relative;
+    margin-left: -300px;
+}

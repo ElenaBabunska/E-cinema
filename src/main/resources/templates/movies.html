@@ -1,0 +1,114 @@
+<head>
+    <script>
+        function pageRedirect(atr) {
+            window.location.href = '/movies/trailer';
+        }
+    </script>
+</head>
+<div xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"  >
+    <div class="container">
+        <h1 th:if="${hasError}" th:text="${error}"></h1>
+    </div>
+
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">MOVIES</h1>
+        </div>
+    </div>
+    <div class="filter container">
+        <form id="filter-form">
+            <div class="text-center" style="background-image: none;">
+                <label for="name" class="name col-2">Movie Name</label>
+                <input id="name" name="name" type="text" class="col-2"/>
+                <label for="categoryId" class="categoryId col-2">Category</label>
+                <select id="categoryId" name='categoryId' class="col-2" style="height: 32px">
+                    <option value="">All</option>
+                    <option  th:each="cat : ${categories}"
+                             th:value="${cat.getId()}"
+                             th:text="${cat.getName()}"></option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button id="filter" type="submit"  class="btn btn-info">Filter</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="jumbotron ">
+        <div class="container text-center" style="background-image: none">
+            <div class="wrapper row" th:if="${movies.size() > 0}">
+
+                <div th:each="m : ${movies}" style="width:415px;" class="col-4">
+                    <div class="card-group" >
+                        <div class="card" >
+
+                            <img alt="#" class="card-img-top" height="255px" th:id="${session.subscription!=null} ? '#' :'/'"
+                                 style="border-radius: 8px" onclick="pageRedirect(this.getAttribute('id'))"
+                                 th:src="${m.getUrl()}" width="720px">
+                            <br>
+                            <h5  class="card-title w3-cursive" th:text="${m.getName()}"></h5>
+                            <div class="card-body">
+                                <div class="info-movie" >
+
+                                    <p class="card-text"  th:text="${m.getDescription()}"></p>
+                                    <p class="card-text"  th:text="${m.getDirector() != null}
+                            ? ${m.getDirector().getName()} : 'No Director'"></p>
+                                    <p class="card-text"th:text="${m.getCategory() != null}
+                            ? ${m.getCategory().getName()} : 'No Category'"></p>
+                                    <p class="card-text"><small class="text-muted"></small></p>
+                                </div>
+                            </div>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <form th:action="@{'/movies/{id}/delete' (id=${m.getId()})}"
+                                      th:method="POST">
+                                    <button type="submit"
+                                            class="btn btn-outline-danger">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                                </form>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{'/movies/{id}/edit' (id=${m.getId()})}"
+                                   class="btn btn-info" >
+                                    Edit
+                                </a>
+                            </th:block>
+                            <th:block   sec:authorize="hasRole('ROLE_USER')">
+                                <form th:action="@{'/favourites/{id}' (id=${m.getId()})}"
+                                      th:method="POST">
+                                    <button  type="submit" class="btn btn-sm btn-primary alert alert-success" role="alert" onclick="alert('This movie is added to your favourites list');" >
+                                        Add movie to favourites
+                                    </button>
+                                </form>
+                            </th:block>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col mb-3 text-center">
+            <div class="row">
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div class="col-sm-12 col-md-12">
+                        <a href="/movies/add-form" class="btn btn-block btn-primary " id="add">
+                            Add new movie
+                        </a>
+
+                    </div>
+
+                </th:block>
+            </div>
+
+
+        </div>
+        <div class="text-center">
+            <a href="/movies" class="btn btn-outline-primary">Back</a>
+        </div>
+    </div>
+
+</div>
