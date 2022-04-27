@@ -39,12 +39,12 @@ public class DataInitializer {
     @PostConstruct
     public void initData() {
         //Kategorii
-        this.categoryService.create("adventure");
-        this.categoryService.create("horror");
-        this.categoryService.create("drama");
-        this.categoryService.create("romance");
-        this.categoryService.create("comedy");
-        this.categoryService.create("action");
+        this.categoryService.create("Adventure");
+        this.categoryService.create("Horror");
+        this.categoryService.create("Drama");
+        this.categoryService.create("Romance");
+        this.categoryService.create("Comedy");
+        this.categoryService.create("Action");
         List<Category> categories = this.categoryService.listAll();
 
         //Directors
@@ -59,12 +59,12 @@ public class DataInitializer {
 
 
         //movies
-        this.movieService.create("A dog's way home", "A devoted, homesick dog goes on a treacherous journey across the American heartland to be reunited with her owner", directors.get(0),categories.get(0), LocalDateTime.now(), LocalDateTime.of(2022, 11, 25, 5, 30),null,"");
-        this.movieService.create("Against the ice", "Exploring Greenland's vast landscape for a lost map, two men must fight to survive. Based on the true story of Denmark's 1909 polar expedition", directors.get(1),categories.get(2), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "");
-        this.movieService.create("Love Tactics", "An ad executive and a fashion designer-blogger don't believe in love, so they place a bet to make the other fall head over heels — with unusual tactics.", directors.get(2),categories.get(3), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "");
-        this.movieService.create("Red Notice", "An FBI profiler pursuing the world's most wanted art thief becomes his reluctant partner in crime to catch an elusive crook who's always one step ahead", directors.get(3),categories.get(5), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "");
-        this.movieService.create("The Equalizer 2", "Ex-CIA agent-turned-vigilante Robert McCall uses his deadly skills once again to avenge the death of a close friend and former colleague", directors.get(4),categories.get(4), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "");
-        this.movieService.create("Baywatch", "To save their beach, elite lifeguard Mitch Buchannon and a former Olympian probe a criminal plot that threatens the future of the bay.", directors.get(5),categories.get(4), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "");
+        this.movieService.create("A dog's way home", "A devoted, homesick dog goes on a treacherous journey across the American heartland to be reunited with her owner", directors.get(0),categories.get(0), LocalDateTime.now(), LocalDateTime.of(2022, 11, 25, 5, 30),null,"images/dog.jpg");
+        this.movieService.create("Against the ice", "Exploring Greenland's vast landscape for a lost map, two men must fight to survive. Based on the true story of Denmark's 1909 polar expedition", directors.get(1),categories.get(2), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "images/against.jpeg");
+        this.movieService.create("Love Tactics", "An ad executive and a fashion designer-blogger don't believe in love, so they place a bet to make the other fall head over heels.", directors.get(2),categories.get(3), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "images/love.jpg");
+        this.movieService.create("Red Notice", "An FBI profiler pursuing the world's most wanted art thief becomes his reluctant partner in crime to catch an elusive crook who's always one step ahead", directors.get(3),categories.get(5), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "images/red notice.jpg");
+        this.movieService.create("The Equalizer 2", "Ex-CIA agent-turned-vigilante Robert McCall uses his deadly skills once again to avenge the death of a close friend and former colleague", directors.get(4),categories.get(4), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "images/the eq.jpg");
+        this.movieService.create("Baywatch", "To save their beach, elite lifeguard Mitch Buchannon and a former Olympian probe a criminal plot that threatens the future of the bay.", directors.get(5),categories.get(4), LocalDateTime.now(), LocalDateTime.of(2023, 11, 25, 5, 30),null, "images/baywatchh.jpg");
 
         List<Movie> movies = this.movieService.findAll();
 

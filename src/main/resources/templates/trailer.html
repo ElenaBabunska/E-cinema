@@ -1,31 +1,55 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <style>
+        .container-fluid{
+            font-size: large;
+        }
+        .container2{
+            color: #0b3954;
+        }
+        .slika{
+            width: 20px;
+            height: 20px;
+        }
+        #h3{
+            background-color: cornsilk;
+            position: absolute;
+            margin-top: -350px;
+            margin-left: 260px;
+            border-radius: 20px;
+            width: 620px;
+            height: 90px;
+        }
+
+    </style>
 </head>
-<div  xmlns:th="http://www.thymeleaf.org" class="container">
+<div  xmlns:th="http://www.thymeleaf.org" class="container" style="height: 700px">
     <div class="text-center" th:if="${session.subscription!=null}">
-        <video width="850" height="600"  muted controls>
+        <video width="850" height="600"  muted controls >
             <source th:src="@{/video/video.mp4}" type="video/mp4">
             Movie Trailer
         </video>
-
     </div>
+
     <div id="ss" class="text-center" style="height: 600px; position: relative"
          th:if="${session.subscription==null}">
 
-        <video width="850" height="600"  muted style="filter: blur(3px)" >
+        <video width="850" height="600" muted style="filter: grayscale(100%)">
             <source th:src="@{/video/video.mp4}" type="video/mp4" >
 
         </video>
-        <h3>To watch this movie you have to buy a ticket first!
-            <div>
-                <a th:href="@{'/tickets'}"
-                   class="btn btn-sm">
-                    <i class="fa fa-trash " role="alert">Buy a ticket</i>
-                </a>
-            </div>
-        </h3>
+
+        <div id="h3">
+            <h3 style="color: #0b3954; padding-top: 5px">To watch this movie you have to buy a ticket first!
+                <div>
+                    <a th:href="@{'/tickets'}"
+                       class="btn btn-sm" style="background-color: #0b3954; color: wheat">
+                        <i class="fa fa-trash" role="alert">Buy a ticket</i>
+                    </a>
+                </div>
+            </h3>
+        </div>
 
     </div>
 

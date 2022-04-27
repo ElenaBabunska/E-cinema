@@ -10,27 +10,26 @@
         <h1 th:if="${hasError}" th:text="${error}"></h1>
     </div>
 
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center" style="background-color: #0b3954; color: wheat">
         <div class="container">
-            <h1 class="jumbotron-heading">MOVIES</h1>
+            <h1 class="jumbotron-heading" style="font-weight: bold; font-size: 40px">Movies</h1>
         </div>
     </div>
     <div class="filter container">
         <form id="filter-form">
             <div class="text-center" style="background-image: none;">
-                <label for="name" class="name col-2">Movie Name</label>
-                <input id="name" name="name" type="text" class="col-2"/>
-                <label for="categoryId" class="categoryId col-2">Category</label>
-                <select id="categoryId" name='categoryId' class="col-2" style="height: 32px">
-                    <option value="">All</option>
+                <label style="color: #0b3954; font-size: 25px" for="name" class="name col-2">Movie Name</label>
+                <input style="border-radius: 10px" id="name" name="name" type="text" class="col-2"/>
+                <label style="color: #0b3954; font-size: 25px" for="categoryId" class="categoryId col-2">Category</label>
+                <select id="categoryId" name='categoryId' class="col-2" style="height: 32px; border-radius: 10px; color: #0b3954">
+                    <option style="color: #0b3954" value="">All</option>
                     <option  th:each="cat : ${categories}"
                              th:value="${cat.getId()}"
-                             th:text="${cat.getName()}"></option>
+                             th:text="${cat.getName()}" style="color: #0b3954"></option>
                 </select>
+                    <button id="filter" type="submit"  class="btn btn-lg" style="background-color: #0b3954; color: wheat; margin-left: 100px; margin-top: -15px; font-style: italic">Filter</button>
             </div>
-            <div class="text-center">
-                <button id="filter" type="submit"  class="btn btn-info">Filter</button>
-            </div>
+
         </form>
     </div>
 
@@ -41,21 +40,21 @@
 
                 <div th:each="m : ${movies}" style="width:415px;" class="col-4">
                     <div class="card-group" >
-                        <div class="card" >
+                        <div class="card" style="background-color: wheat; border-radius: 10px; color: #0b3954; height: 580px; margin-top: 15px" >
 
                             <img alt="#" class="card-img-top" height="255px" th:id="${session.subscription!=null} ? '#' :'/'"
-                                 style="border-radius: 8px" onclick="pageRedirect(this.getAttribute('id'))"
-                                 th:src="${m.getUrl()}" width="720px">
+                                 style="border-radius: 8px; height: 229px; width:348px " onclick="pageRedirect(this.getAttribute('id'))"
+                                 th:src="${m.getUrl()}" >
                             <br>
-                            <h5  class="card-title w3-cursive" th:text="${m.getName()}"></h5>
+                            <h5 style="font-size: 25px; font-weight: bold" class="card-title w3-cursive" th:text="${m.getName()}"></h5>
                             <div class="card-body">
                                 <div class="info-movie" >
 
                                     <p class="card-text"  th:text="${m.getDescription()}"></p>
                                     <p class="card-text"  th:text="${m.getDirector() != null}
-                            ? ${m.getDirector().getName()} : 'No Director'"></p>
+                            ? 'Director: ' + ${m.getDirector().getName()} + ' ' + ${m.getDirector().getSurname()} : 'No Director'"></p>
                                     <p class="card-text"th:text="${m.getCategory() != null}
-                            ? ${m.getCategory().getName()} : 'No Category'"></p>
+                            ? 'Category: ' + ${m.getCategory().getName()} : 'No Category'"></p>
                                     <p class="card-text"><small class="text-muted"></small></p>
                                 </div>
                             </div>
@@ -63,21 +62,21 @@
                                 <form th:action="@{'/movies/{id}/delete' (id=${m.getId()})}"
                                       th:method="POST">
                                     <button type="submit"
-                                            class="btn btn-outline-danger">
+                                            class="btn btn-danger w-100">
                                         <i class="fa fa-trash">Delete</i>
                                     </button>
                                 </form>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{'/movies/{id}/edit' (id=${m.getId()})}"
-                                   class="btn btn-info" >
+                                   class="btn" style="background-color: #0b3954; color: wheat; font-style: italic" >
                                     Edit
                                 </a>
                             </th:block>
                             <th:block   sec:authorize="hasRole('ROLE_USER')">
                                 <form th:action="@{'/favourites/{id}' (id=${m.getId()})}"
                                       th:method="POST">
-                                    <button  type="submit" class="btn btn-sm btn-primary alert alert-success" role="alert" onclick="alert('This movie is added to your favourites list');" >
+                                    <button style="background-color: #0b3954; color: wheat; font-style: italic" type="submit" class="btn btn-sm  alert alert-success" role="alert" onclick="alert('This movie is added to your favourites list');" >
                                         Add movie to favourites
                                     </button>
                                 </form>
@@ -91,23 +90,18 @@
 
             </div>
         </div>
-        <div class="col mb-3 text-center">
-            <div class="row">
+        <div>
+            <div class="row text-center">
                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                    <div class="col-sm-12 col-md-12">
-                        <a href="/movies/add-form" class="btn btn-block btn-primary " id="add">
+                    <div class="col-sm-4 col-md-4 text-center">
+                        <a href="/movies/add-form" class="btn btn-block btn-dark " id="add" style="margin-top: 30px; margin-left: 500px; font-style: italic">
                             Add new movie
                         </a>
-
                     </div>
 
                 </th:block>
             </div>
 
-
-        </div>
-        <div class="text-center">
-            <a href="/movies" class="btn btn-outline-primary">Back</a>
         </div>
     </div>
 
