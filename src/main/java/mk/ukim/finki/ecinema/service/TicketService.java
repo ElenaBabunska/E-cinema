@@ -10,7 +10,7 @@ public interface TicketService {
     List<Ticket> findAll();
     Optional<Ticket> findById(Long id);
     Ticket save(Double price, Long movieId);
-    Ticket update(Long code, Double price, Long movieId);
+    Ticket update(Long code, Double price);
     Ticket update2(Long code, Double price);
     void deleteById(Long code);
 }

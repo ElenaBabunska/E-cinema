@@ -104,7 +104,8 @@ public class MovieController {
             @RequestParam String premiereStart,
             @RequestParam String premiereEnd,
             @RequestParam Double ticketPrice,
-            @RequestParam String url) {
+            @RequestParam String url,
+            Model model) {
         if (id != null) {
             this.movieService.update(id,name,description,director,category,LocalDateTime.parse(premiereStart),LocalDateTime.parse(premiereEnd), this.ticketService.findAll(), url);
         } else {

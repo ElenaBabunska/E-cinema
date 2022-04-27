@@ -40,11 +40,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket update(Long code, Double price, Long movieId) {
-        Movie movie = this.movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException(movieId));
+    public Ticket update(Long code, Double price) {
         Ticket ticket = this.ticketRepository.findById(code).orElseThrow(()-> new TicketNotFoundException(code));
         ticket.setPrice(price);
-        ticket.setMovie(movie);
         return this.ticketRepository.save(ticket);
     }
 

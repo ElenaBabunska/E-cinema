@@ -43,13 +43,13 @@ public class TicketsController {
         model.addAttribute("bodyContent","tickets");
         return "master-template";
     }
-    @GetMapping("/tickets/add-form")
-    public String showAddTicket(Model model){
-        List<Ticket> tickets = this.ticketService.findAll();
-        model.addAttribute("tickets",tickets);
-        model.addAttribute("bodyContent","add-ticket");
-        return "master-template";
-    }
+//    @GetMapping("/tickets/add-form")
+//    public String showAddTicket(Model model){
+//        List<Ticket> tickets = this.ticketService.findAll();
+//        model.addAttribute("tickets",tickets);
+//        model.addAttribute("bodyContent","add-ticket");
+//        return "master-template";
+//    }
 
     @GetMapping("/tickets/{id}/edit")
     public String showEditTicket(@PathVariable Long id, Model model){
@@ -72,14 +72,10 @@ public class TicketsController {
     //dodavanje karta za soodveten film
     @PostMapping("/tickets/edit")
     public String saveTicket(
-            @RequestParam(required = false) Long id,
-            @RequestParam Double price,
-            @RequestParam Long movieId) {
-        if (id != null) {
-            this.ticketService.update(id, price, movieId);
-        } else {
-            this.ticketService.save(price, movieId);
-        }
+            @RequestParam Long id,
+            @RequestParam Double price) {
+
+        this.ticketService.update(id, price);
         return "redirect:/tickets";
     }
 
