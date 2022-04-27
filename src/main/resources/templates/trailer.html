@@ -25,12 +25,20 @@
     </style>
 </head>
 <div  xmlns:th="http://www.thymeleaf.org" class="container" style="height: 700px">
-    <div class="text-center" th:if="${session.subscription!=null}">
-        <video width="850" height="600"  muted controls >
-            <source th:src="@{/video/video.mp4}" type="video/mp4">
-            Movie Trailer
-        </video>
-    </div>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <div class="text-center">
+            <video width="850" height="600" muted controls>
+                <source th:src="@{/video/video.mp4}" type="video/mp4">
+            </video>
+        </div>
+    </th:block>
+
+    <th:block sec:authorize="hasRole('ROLE_USER')">
+        <div class="text-center" th:if="${session.subscription!=null}">
+            <video width="850" height="600"  muted controls >
+                <source th:src="@{/video/video.mp4}" type="video/mp4">
+            </video>
+        </div>
 
     <div id="ss" class="text-center" style="height: 600px; position: relative"
          th:if="${session.subscription==null}">
@@ -52,5 +60,5 @@
         </div>
 
     </div>
-
+    </th:block>
 </div>

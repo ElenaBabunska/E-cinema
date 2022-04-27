@@ -103,16 +103,13 @@ public class MovieController {
             @RequestParam Director director,
             @RequestParam String premiereStart,
             @RequestParam String premiereEnd,
-            @RequestParam Integer ticketsNum,
             @RequestParam Double ticketPrice,
             @RequestParam String url) {
         if (id != null) {
             this.movieService.update(id,name,description,director,category,LocalDateTime.parse(premiereStart),LocalDateTime.parse(premiereEnd), this.ticketService.findAll(), url);
         } else {
             List<Ticket> tickets = new ArrayList<>();
-            for (int i=1; i<=ticketsNum; i++){
-                tickets.add(new Ticket(ticketPrice));
-            }
+            tickets.add(new Ticket(ticketPrice, ticketPrice));
             this.movieService.create(name,description, director, category, LocalDateTime.parse(premiereStart),LocalDateTime.parse(premiereEnd), tickets, url);
         }
         return "redirect:/movies";

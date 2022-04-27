@@ -45,6 +45,8 @@ public class TicketsController {
     }
     @GetMapping("/tickets/add-form")
     public String showAddTicket(Model model){
+        List<Ticket> tickets = this.ticketService.findAll();
+        model.addAttribute("tickets",tickets);
         model.addAttribute("bodyContent","add-ticket");
         return "master-template";
     }

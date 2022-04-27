@@ -29,8 +29,10 @@ public class Ticket {
         this.movie = movie;
         this.discountPrice=price;
     }
-    public Ticket(Double price){
+
+    public Ticket(Double price, Double discountPrice){
         this.price = price;
+        this.discountPrice = discountPrice;
     }
 
 
