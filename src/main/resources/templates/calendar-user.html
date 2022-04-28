@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<br/>
+<br/>
+<div class="main" style="display: flex; background-color: #0b3954">
+
+    <div style="margin-right: 10px;">
+        <div id="nav" style="background-color: wheat"></div>
+    </div>
+    <div style="flex-grow: 1;">
+        <div id="dp"></div>
+    </div>
+</div>
+
+<script src=""></script>
+<script src="/js/daypilot/daypilot-all.min.js"></script>
+
+<script>
+
+    var nav = new DayPilot.Navigator("nav");
+    nav.showMonths = 3;
+    nav.skipMonths = 3;
+    nav.selectMode = "week";
+    nav.onTimeRangeSelected = function(args) {
+        dp.startDate = args.day;
+        dp.update();
+        dp.events.load("/api/events");
+    };
+    nav.init();
+
+
+    var dp = new DayPilot.Calendar("dp");
+    dp.viewType = "Week";
+
+
+    dp.onEventMove = function (args) {
+        var params = {
+            id: args.e.id(),
+            start: args.newStart.toString(),
+            end: args.newEnd.toString()
+        };
+        DayPilot.Http.ajax({
+            url: '/api/events/move',
+            data: params,
+            success: function (ajax) {
+                dp.message("Event moved");
+            }
+        });
+    };
+    dp.onEventResize = function (args) {
+        var params = {
+            id: args.e.id(),
+            start: args.newStart.toString(),
+            end: args.newEnd.toString()
+        };
+        DayPilot.Http.ajax({
+            url: '/api/events/move',
+            data: params,
+            success: function (ajax) {
+                dp.message("Event resized");
+            }
+        });
+    };
+    dp.onBeforeEventRender = function(args) {
+        args.data.barColor = args.data.color;
+        args.data.areas = [
+            { top: 2, right: 2, icon: "", visibility: "Visible", action: "ContextMenu", style: "font-size: 12px; background-color: #f9f9f9; border: 1px solid #ccc; padding: 2px 2px 0px 2px; cursor:pointer;"}
+        ];
+    };
+    dp.contextMenu = new DayPilot.Menu({
+        items: [
+            {
+                text: "Blue",
+                icon: "icon icon-blue",
+                color: "#1066a8",
+                onClick: function(args) { updateColor(args.source, args.item.color); }
+            },
+            {
+                text: "Green",
+                icon: "icon icon-green",
+                color: "#6aa84f",
+                onClick: function(args) { updateColor(args.source, args.item.color); }
+            },
+            {
+                text: "Yellow",
+                icon: "icon icon-yellow",
+                color: "#f1c232",
+                onClick: function(args) { updateColor(args.source, args.item.color); }
+            },
+            {
+                text: "Red",
+                icon: "icon icon-red",
+                color: "#cc0000",
+                onClick: function(args) { updateColor(args.source, args.item.color); }
+            },
+
+        ]
+    });
+    dp.init();
+
+    dp.events.load("/api/events");
+
+
+    function updateColor(e, color) {
+        var params = {
+            id: e.id(),
+            color: color
+        };
+        DayPilot.Http.ajax({
+            url: '/api/events/setColor',
+            data: params,
+            success: function (ajax) {
+                e.data.color = color;
+                dp.events.update(e);
+                dp.message("Color updated");
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

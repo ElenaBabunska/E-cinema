@@ -5,13 +5,16 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import mk.ukim.finki.ecinema.model.Event;
 import mk.ukim.finki.ecinema.service.EventService;
 import mk.ukim.finki.ecinema.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import java.time.LocalDateTime;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.transaction.Transactional;
 
 @RestController
@@ -28,14 +31,15 @@ public class EventsRestController {
 
 
     @RequestMapping("/events")
-    public ModelAndView home(HttpServletRequest req) {
-//        String username  = req.getRemoteUser();
-//        User user = this.userService.findByUsername(username);
+    public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject(user);
-        modelAndView.getModel().put("bodyContent","calendar.html");
+
+        modelAndView.getModel().put("bodyContent","calendar");
         modelAndView.setViewName("master-template");
+        modelAndView.getModel().put("role", SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0]);
+
         return modelAndView;
+
     }
 
     @GetMapping("/api/events")

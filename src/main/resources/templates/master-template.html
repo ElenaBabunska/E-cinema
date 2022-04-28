@@ -17,9 +17,26 @@
 <body style="font-family: 'Sequel 100 Wide','sans-serif'">
 <header th:replace="fragments/header"/>
 
-<section th:include="${bodyContent}">
+<div th:if="${#strings.equals( bodyContent, 'calendar')}">
+    <div th:if="${#strings.equals( role, 'ROLE_ADMIN')}">
+        <section  th:include="${bodyContent}">
 
-</section>
+        </section>
+    </div>
+
+    <div th:if="${#strings.equals( role, 'ROLE_USER')}">
+        <section  th:include="calendar-user">
+
+        </section>
+    </div>
+</div>
+
+<div th:unless="${#strings.equals( bodyContent, 'calendar')}">
+    <section  th:include="${bodyContent}">
+
+    </section>
+</div>
+
 <!-- Footer -->
 <footer th:replace="fragments/footer"/>
 </body>
