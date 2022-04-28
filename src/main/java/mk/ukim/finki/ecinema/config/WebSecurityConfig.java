@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers( "/assets/**", "/home", "/register", "/signin/**","/signup/**", "/api/**", "/header.html", "footer.html", "/login").permitAll()
+                .antMatchers( "/assets/**", "/home", "/register", "/signin/**","/signup/**", "/api/**", "/header.html", "footer.html", "/login", "header.css").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
