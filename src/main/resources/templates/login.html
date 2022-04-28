@@ -20,6 +20,11 @@
             width:300px;
             padding-top: 50px;
         }
+        #fb{
+            color: white;
+            border-radius: 3px;
+            background-color: #0b3954;
+        }
     </style>
 </head>
 <div class="container text-center" xmlns:th="http://www.thymeleaf.org">
@@ -40,6 +45,11 @@
 
         <button id="submit" class="btn btn-lg btn-light btn-block" style="color: #0b3954" type="submit">Sign in</button> <br>
         <a href="/register" class="btn btn-block " style="background-color: lightgray; margin-top: 10px" >Register here</a>
+    </form>
+
+    <form action="/signin/facebook" method="POST" style="margin-left: 160px">
+        <input type="hidden" name="scope" value="public_profile" />
+        <input type="submit" value="Login using Facebook" id="fb" class="btn btn-primary"/>
     </form>
 
 </div>

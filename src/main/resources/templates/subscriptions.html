@@ -99,20 +99,20 @@
                             <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${session.subscription} == null">
                                 <a th:href="@{'/subscriptions/apply/{id}' (id=${s.getId()})}"
                                    class="btn btn-sm apply">
-                                    <i class="fa fa-trash " role="alert" onclick="alert('Congratulations! You applied successfully to this subscription');" >Apply</i>
+                                    <i role="alert" onclick="alert('Congratulations! You applied successfully to this subscription');" >Apply</i>
 
                                 </a>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{'/subscriptions/users/{id}' (id=${s.getId()})}"
                                    class="btn btn-sm  view-users">
-                                    <i class="fa fa-trash">View Users</i>
+                                    <i>View Users</i>
                                 </a>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{'/subscriptions/edit-form/{id}' (id=${s.getId()})}"
                                    class="btn btn-sm edit-product">
-                                    <i class="fa fa-trash">Edit Subscription</i>
+                                    <i>Edit Subscription</i>
                                 </a>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
@@ -120,7 +120,7 @@
                                       th:method="POST">
                                     <button type="submit"
                                             class="btn btn-danger delete-product">
-                                        <i class="fa fa-trash">Delete Subscription</i>
+                                        <i class="fa fa-trash"> Delete Subscription</i>
                                     </button>
                                 </form>
                             </th:block>
@@ -135,7 +135,7 @@
             <div style="margin-left: 700px; margin-bottom: -30px; margin-top: 30px">
                 <a th:href="@{'/subscriptions/add-form'}"
                    class="btn btn-block btn-dark">
-                    <i class="fa fa-trash">Add new subscription</i>
+                    <i>Add new subscription</i>
                 </a>
             </div>
         </th:block>

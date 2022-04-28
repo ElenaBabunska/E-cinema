@@ -90,8 +90,8 @@ public class TicketsController {
         }
         else {
             for (Ticket ticket : tickets) {
-                ticket.setDiscountPrice(ticket.getPrice() * (value / 100.0));
-                this.ticketService.update2(ticket.getCode(),ticket.getPrice() * (value / 100.0));
+                ticket.setDiscountPrice(ticket.getPrice() - (ticket.getPrice() * (value / 100.0)));
+                this.ticketService.update2(ticket.getCode(),ticket.getPrice() - (ticket.getPrice() * (value / 100.0)));
             }
 
             model.addAttribute("tickets", tickets);
