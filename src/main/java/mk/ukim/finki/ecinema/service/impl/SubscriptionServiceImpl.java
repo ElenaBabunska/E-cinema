@@ -3,14 +3,12 @@ package mk.ukim.finki.ecinema.service.impl;
 import mk.ukim.finki.ecinema.model.Subscription;
 import mk.ukim.finki.ecinema.model.User;
 import mk.ukim.finki.ecinema.model.exceptions.SubscriptionIdNotFoundException;
-import mk.ukim.finki.ecinema.model.exceptions.UserNotFoundException;
 import mk.ukim.finki.ecinema.repository.SubscriptionRepository;
 import mk.ukim.finki.ecinema.repository.UserRepository;
 import mk.ukim.finki.ecinema.service.SubscriptionService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,13 +53,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public void deleteById(Long id) {
         this.subscriptionRepository.deleteById(id);
     }
-
-//    @Override
-//    public void addUserToPlatform(Long id, String username) {
-//        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
-//        Subscription subscription = this.findById(id);
-//        subscription.getUsers().add(user);
-//    }
 
     @Override
     public List<User> listUsersInProgram(Long subscriptionId) {

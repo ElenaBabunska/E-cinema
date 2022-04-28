@@ -3,7 +3,6 @@ package mk.ukim.finki.ecinema.web.rest;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import mk.ukim.finki.ecinema.model.Event;
-import mk.ukim.finki.ecinema.model.User;
 import mk.ukim.finki.ecinema.service.EventService;
 import mk.ukim.finki.ecinema.service.UserService;
 import org.springframework.format.annotation.DateTimeFormat;

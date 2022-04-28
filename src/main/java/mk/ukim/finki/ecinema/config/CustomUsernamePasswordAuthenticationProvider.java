@@ -22,7 +22,6 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
     }
 
     @Override
-    //se povikuva koga korisnikot ke klikne login,post baranjeto
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
@@ -31,8 +30,7 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
         if ("".equals(username) || "".equals(password)) {
             throw new BadCredentialsException("Invalid Credentials");
         }
-        UserDetails userDetails = this.userService.loadUserByUsername(username); //izvlekuvanje na korisnikot
-        //dali hesiranata vrednost shto ja vnel e ista so hsiranata vrednost vvo baza
+        UserDetails userDetails = this.userService.loadUserByUsername(username);
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Password is incorrect!");
         }

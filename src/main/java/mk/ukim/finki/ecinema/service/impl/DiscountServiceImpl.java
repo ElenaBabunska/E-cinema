@@ -3,7 +3,6 @@ package mk.ukim.finki.ecinema.service.impl;
 import mk.ukim.finki.ecinema.model.Discount;
 import mk.ukim.finki.ecinema.model.User;
 import mk.ukim.finki.ecinema.model.exceptions.DiscountNotFoundException;
-import mk.ukim.finki.ecinema.model.exceptions.UserNotFoundException;
 import mk.ukim.finki.ecinema.repository.DiscountRepository;
 import mk.ukim.finki.ecinema.repository.UserRepository;
 import mk.ukim.finki.ecinema.service.DiscountService;
@@ -11,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

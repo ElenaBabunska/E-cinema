@@ -1,6 +1,5 @@
 package mk.ukim.finki.ecinema.service;
 
-import mk.ukim.finki.ecinema.model.Movie;
 import mk.ukim.finki.ecinema.model.Ticket;
 
 import java.util.List;

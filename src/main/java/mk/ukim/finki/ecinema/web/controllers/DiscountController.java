@@ -34,7 +34,6 @@ public class DiscountController {
         return "master-template";
     }
 
-    //samo da se pokazhe forma za dodavanje popust, a posle kje se prefrli na create metodot
     @GetMapping("/discounts/add")
     public String showAddDiscount(Model model){
         model.addAttribute("bodyContent","add-discount");

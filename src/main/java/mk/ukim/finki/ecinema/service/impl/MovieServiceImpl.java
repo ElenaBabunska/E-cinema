@@ -1,8 +1,6 @@
 package mk.ukim.finki.ecinema.service.impl;
 
 import mk.ukim.finki.ecinema.model.*;
-import mk.ukim.finki.ecinema.model.exceptions.CategoryIdNotFoundException;
-import mk.ukim.finki.ecinema.model.exceptions.DirectorNotFoundException;
 import mk.ukim.finki.ecinema.model.exceptions.MovieNotFoundException;
 import mk.ukim.finki.ecinema.repository.CategoryRepository;
 import mk.ukim.finki.ecinema.repository.DirectorRepository;
@@ -11,7 +9,6 @@ import mk.ukim.finki.ecinema.service.MovieService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

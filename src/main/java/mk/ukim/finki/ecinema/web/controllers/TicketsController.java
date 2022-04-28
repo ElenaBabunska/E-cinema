@@ -43,14 +43,6 @@ public class TicketsController {
         model.addAttribute("bodyContent","tickets");
         return "master-template";
     }
-//    @GetMapping("/tickets/add-form")
-//    public String showAddTicket(Model model){
-//        List<Ticket> tickets = this.ticketService.findAll();
-//        model.addAttribute("tickets",tickets);
-//        model.addAttribute("bodyContent","add-ticket");
-//        return "master-template";
-//    }
-
     @GetMapping("/tickets/{id}/edit")
     public String showEditTicket(@PathVariable Long id, Model model){
         if (this.ticketService.findById(id).isPresent()) {
@@ -69,7 +61,7 @@ public class TicketsController {
         this.ticketService.deleteById(id);
         return "redirect:/tickets";
     }
-    //dodavanje karta za soodveten film
+
     @PostMapping("/tickets/edit")
     public String saveTicket(
             @RequestParam Long id,
@@ -85,7 +77,6 @@ public class TicketsController {
         Double value = discount.getValue();
 
         if (LocalDate.now().isAfter(discount.getValidUntil())){
-            //istekol rokot.
             return "discount-error";
         }
         else {

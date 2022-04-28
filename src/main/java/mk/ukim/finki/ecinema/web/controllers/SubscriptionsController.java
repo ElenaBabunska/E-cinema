@@ -1,7 +1,6 @@
 package mk.ukim.finki.ecinema.web.controllers;
 
 import mk.ukim.finki.ecinema.model.Subscription;
-import mk.ukim.finki.ecinema.model.exceptions.CouldNotDeleteSubscriptionException;
 import mk.ukim.finki.ecinema.service.SubscriptionService;
 import mk.ukim.finki.ecinema.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -41,7 +40,6 @@ public class SubscriptionsController {
         return "master-template";
 
     }
-
 
     @PostMapping("/subscriptions/delete/{id}")
     public String deleteSubscriptions(@PathVariable Long id){

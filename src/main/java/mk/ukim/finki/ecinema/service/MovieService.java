@@ -3,7 +3,6 @@ package mk.ukim.finki.ecinema.service;
 import mk.ukim.finki.ecinema.model.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
