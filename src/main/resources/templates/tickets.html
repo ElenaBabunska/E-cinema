@@ -22,7 +22,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                        <tr style="color: #0b3954">
+                        <tr style="color: #0b3954; font-size: 18px">
                             <th scope="col">Ticket code</th>
                             <th scope="col">Movie name</th>
                             <th scope="col">Price</th>
@@ -58,8 +58,8 @@
                             <td>
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <a th:href="@{'/tickets/{id}/delete' (id=${t.getCode()})}"
-                                       class="btn btn-danger fa fa-trash" style="font-style: italic">
-                                         Delete
+                                       class="btn btn-danger" style="font-style: italic">
+                                        <i class="fa fa-trash"> Delete</i>
                                     </a>
                                 </th:block>
                             </td>

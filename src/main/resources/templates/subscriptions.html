@@ -106,13 +106,13 @@
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{'/subscriptions/users/{id}' (id=${s.getId()})}"
                                    class="btn btn-sm  view-users">
-                                    <i>View Users</i>
+                                    <i style="font-weight: bold">View Users</i>
                                 </a>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{'/subscriptions/edit-form/{id}' (id=${s.getId()})}"
                                    class="btn btn-sm edit-product">
-                                    <i>Edit Subscription</i>
+                                    <i style="font-weight: bold">Edit Subscription</i>
                                 </a>
                             </th:block>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
