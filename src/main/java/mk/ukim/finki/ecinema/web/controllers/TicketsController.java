@@ -74,7 +74,6 @@ public class TicketsController {
     public String saveTicket(
             @RequestParam Long id,
             @RequestParam Double price) {
-
         this.ticketService.update(id, price);
         return "redirect:/tickets";
     }

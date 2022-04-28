@@ -29,6 +29,8 @@ public class SubscriptionsController {
     public String getSubscriptionPage (@RequestParam(required = false) String error,
                                    HttpServletRequest req,
                                    Model model){
+        String username = req.getRemoteUser();
+        req.getSession().setAttribute("subscription",this.userService.findByUsername(username).getSubscription());
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);

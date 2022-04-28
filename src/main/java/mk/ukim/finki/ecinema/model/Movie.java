@@ -3,6 +3,7 @@ package mk.ukim.finki.ecinema.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,9 +25,9 @@ public class Movie {
     @ManyToOne
     private Category category;
 
-    private LocalDateTime premiereStart;
+    private LocalDate premiereStart;
 
-    private LocalDateTime premiereEnd;
+    private LocalDate premiereEnd;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
@@ -35,7 +36,7 @@ public class Movie {
 
     public Movie(){}
 
-    public Movie(String name, String description, Director director, Category category, LocalDateTime premiereStart, LocalDateTime premiereEnd, List<Ticket> tickets, String url) {
+    public Movie(String name, String description, Director director, Category category, LocalDate premiereStart, LocalDate premiereEnd, List<Ticket> tickets, String url) {
         this.name = name;
         this.description = description;
         this.director = director;

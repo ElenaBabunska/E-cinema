@@ -10,6 +10,7 @@ import mk.ukim.finki.ecinema.repository.MovieRepository;
 import mk.ukim.finki.ecinema.service.MovieService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -44,14 +45,14 @@ public class MovieServiceImpl implements MovieService {
 
 
     @Override
-    public Movie create(String name, String description, Director director, Category category, LocalDateTime premiereStart, LocalDateTime premiereEnd, List<Ticket> tickets, String url) {
+    public Movie create(String name, String description, Director director, Category category, LocalDate premiereStart, LocalDate premiereEnd, List<Ticket> tickets, String url) {
         Movie movie = new Movie(name, description, director, category, premiereStart, premiereEnd, tickets, url);
 
         return this.movieRepository.save(movie);
     }
 
     @Override
-    public Movie update(Long id, String name, String description, Director director, Category category, LocalDateTime premiereStart, LocalDateTime premiereEnd, List<Ticket> tickets, String url) {
+    public Movie update(Long id, String name, String description, Director director, Category category, LocalDate premiereStart, LocalDate premiereEnd, List<Ticket> tickets, String url) {
         Movie movie = this.findById(id);
         movie.setName(name);
         movie.setDescription(description);

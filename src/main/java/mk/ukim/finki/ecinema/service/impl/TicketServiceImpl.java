@@ -43,6 +43,7 @@ public class TicketServiceImpl implements TicketService {
     public Ticket update(Long code, Double price) {
         Ticket ticket = this.ticketRepository.findById(code).orElseThrow(()-> new TicketNotFoundException(code));
         ticket.setPrice(price);
+        ticket.setDiscountPrice(price);
         return this.ticketRepository.save(ticket);
     }
 

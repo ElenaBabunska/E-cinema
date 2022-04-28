@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +23,15 @@ public class MovieController {
     private final DirectorService directorService;
     private final TicketService ticketService;
     private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
 
-    public MovieController(MovieService movieService, CategoryService categoryService, DirectorService directorService, TicketService ticketService, UserService userService) {
+    public MovieController(MovieService movieService, CategoryService categoryService, DirectorService directorService, TicketService ticketService, UserService userService, ShoppingCartService shoppingCartService) {
         this.movieService = movieService;
         this.categoryService = categoryService;
         this.directorService = directorService;
         this.ticketService = ticketService;
         this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
     }
     @GetMapping("/movies")
     public String showMovies(Model model,
@@ -104,19 +106,22 @@ public class MovieController {
             @RequestParam String premiereStart,
             @RequestParam String premiereEnd,
             @RequestParam Double ticketPrice,
-            @RequestParam String url,
-            Model model) {
+            @RequestParam String url) {
         if (id != null) {
-            this.movieService.update(id,name,description,director,category,LocalDateTime.parse(premiereStart),LocalDateTime.parse(premiereEnd), this.ticketService.findAll(), url);
+            this.movieService.update(id,name,description,director,category, LocalDate.parse(premiereStart),LocalDate.parse(premiereEnd), this.ticketService.findAll(), url);
         } else {
             List<Ticket> tickets = new ArrayList<>();
             tickets.add(new Ticket(ticketPrice, ticketPrice));
-            this.movieService.create(name,description, director, category, LocalDateTime.parse(premiereStart),LocalDateTime.parse(premiereEnd), tickets, url);
+            this.movieService.create(name,description, director, category, LocalDate.parse(premiereStart),LocalDate.parse(premiereEnd), tickets, url);
         }
         return "redirect:/movies";
     }
     @GetMapping("/movies/trailer")
-    public String getTrailer(Model model){
+    public String getTrailer(Model model, HttpServletRequest req){
+        String username = req.getRemoteUser();
+        ShoppingCart shoppingCart = this.shoppingCartService.getActiveShoppingCart(username);
+        List<Ticket> usersTickets = shoppingCart.getTickets();
+
         model.addAttribute("bodyContent", "trailer");
         return "master-template";
     }
