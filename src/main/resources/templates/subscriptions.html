@@ -72,76 +72,66 @@
             <h1 class="jumbotron-heading" style="font-weight: bold; color: wheat">Subscriptions</h1>
         </div>
     </div>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${subscriptions.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr style="color: #0b3954; font-size: 18px">
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="s : ${subscriptions}" class="cart-item">
+                            <td th:text="${s.getName()}"></td>
+                            <td th:text="${s.getDescription}"></td>
+                            <td th:text="${s.getPrice()}"></td>
+                            <td class="text-right">
+                                <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${session.subscription} == null">
+                                    <a th:href="@{'/subscriptions/apply/{id}' (id=${s.getId()})}"
+                                       class="btn btn-sm apply">
+                                        <i role="alert" onclick="alert('Congratulations! You applied successfully to this subscription');" >Apply</i>
 
-    <div class="jumbotron text-center" style="background-color: #e7ecef">
-        <div class="container " id="box" >
-
-            <div class="wrapper row" th:if="${subscriptions.size() > 0}" style="margin-left: 113px;">
-                <div th:each="s : ${subscriptions}" style="
-                width:415px;">
-                    <div class="row" style="width: 1000px">
-                        <div class="col-2">
-                            <img  class="card-img-top" th:src="${s.getUrl()}"
-                                  alt="#" height="100px" width="120px">
-                        </div>
-                        <div class="col-2">
-                            <h5  class="card-title" th:text="${s.getName()}"></h5>
-                        </div>
-                        <div class="col-3">
-                            <p class="card-text text-center" th:text="${s.getDescription()}"></p>
-                        </div>
-                        <div class="col-2">
-                            <div class="price">
-                                <span class="card-text" th:text="${s.getPrice()} + ' $'"></span>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${session.subscription} == null">
-                                <a th:href="@{'/subscriptions/apply/{id}' (id=${s.getId()})}"
-                                   class="btn btn-sm apply">
-                                    <i role="alert" onclick="alert('Congratulations! You applied successfully to this subscription');" >Apply</i>
-
-                                </a>
-                            </th:block>
-                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a th:href="@{'/subscriptions/users/{id}' (id=${s.getId()})}"
-                                   class="btn btn-sm  view-users">
-                                    <i style="font-weight: bold">View Users</i>
-                                </a>
-                            </th:block>
-                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a th:href="@{'/subscriptions/edit-form/{id}' (id=${s.getId()})}"
-                                   class="btn btn-sm edit-product">
-                                    <i style="font-weight: bold">Edit Subscription</i>
-                                </a>
-                            </th:block>
-                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                <form th:action="@{'/subscriptions/delete/{id}' (id=${s.getId()})}"
-                                      th:method="POST">
-                                    <button type="submit"
-                                            class="btn btn-danger delete-product">
-                                        <i class="fa fa-trash"> Delete Subscription</i>
-                                    </button>
-                                </form>
-                            </th:block>
-                            <br>
-                        </div>
-                    </div>
+                                    </a>
+                                </th:block>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{'/subscriptions/users/{id}' (id=${s.getId()})}"
+                                       class="btn btn-sm  view-users">
+                                        <i style="font-weight: bold">View Users</i>
+                                    </a>
+                                </th:block>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{'/subscriptions/edit-form/{id}' (id=${s.getId()})}"
+                                       class="btn btn-sm edit-product">
+                                        <i style="font-weight: bold">Edit</i>
+                                    </a>
+                                </th:block>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <form th:action="@{'/subscriptions/delete/{id}' (id=${s.getId()})}"
+                                          th:method="POST">
+                                        <button type="submit"
+                                                class="btn btn-danger delete-product">
+                                            <i class="fa fa-trash"> Delete</i>
+                                        </button>
+                                    </form>
+                                </th:block>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div style="margin-left: 450px; margin-bottom: 30px">
+                        <a th:href="@{'/subscriptions/add-form'}"
+                           class="btn btn-block btn-dark">
+                            <i>Add new subscription</i>
+                        </a>
+                    </div>
+                </th:block>
             </div>
         </div>
-        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-            <div style="margin-left: 700px; margin-bottom: -30px; margin-top: 30px">
-                <a th:href="@{'/subscriptions/add-form'}"
-                   class="btn btn-block btn-dark">
-                    <i>Add new subscription</i>
-                </a>
-            </div>
-        </th:block>
     </div>
-
-
 </div>
-
-

@@ -17,7 +17,6 @@ public class Subscription {
     String name;
     String description;
     Double price;
-    String url;
     LocalDateTime start;
     LocalDateTime end;
 
@@ -28,11 +27,10 @@ public class Subscription {
 
     }
 
-    public Subscription(String name, String description, Double price, String url) {
+    public Subscription(String name, String description, Double price) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.url = url;
         this.users=new ArrayList<>();
         this.start = LocalDateTime.now();
         this.end = LocalDateTime.now();

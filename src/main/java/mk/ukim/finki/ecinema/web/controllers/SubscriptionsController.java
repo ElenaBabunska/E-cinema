@@ -72,13 +72,12 @@ public class SubscriptionsController {
             @RequestParam(required = false) Long id,
             @RequestParam String name,
             @RequestParam String description,
-            @RequestParam Double price,
-            @RequestParam String url
+            @RequestParam Double price
             ) {
         if (id != null) {
             this.subscriptionService.update(id,name,description,price);
         } else {
-            this.subscriptionService.save(name,description,price,url);
+            this.subscriptionService.save(name,description,price);
         }
         return "redirect:/subscriptions";
     }

@@ -34,8 +34,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public Subscription save(String name, String description, Double price, String url) {
-        Subscription subscription = new Subscription(name, description, price, url);
+    public Subscription save(String name, String description, Double price) {
+        Subscription subscription = new Subscription(name, description, price);
         return this.subscriptionRepository.save(subscription);
     }
 

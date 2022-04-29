@@ -94,16 +94,6 @@
                                th:value="(${subscription} != null ? ${subscription.getPrice()} : '')"
                                required>
                     </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="description">Image url</label>
-                        <input type="text"
-                               class="form-program"
-                               id="url"
-                               name="url"
-                               th:value="(${subscription} != null ? ${subscription.getUrl()} : '')"
-                               required>
-                    </div>
 
                         <button id="submit" type="submit" class="btn btn-light btn-lg" style="color: #0b3954; font-style: italic">Submit</button>
 

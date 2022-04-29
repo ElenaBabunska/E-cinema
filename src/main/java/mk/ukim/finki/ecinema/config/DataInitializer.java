@@ -83,8 +83,8 @@ public class DataInitializer {
         this.userService.create("viki", "$2a$12$VzfioHlnit7Nfd4knEk6Su/Wiz6UOIHnwCcrAuVA94htLf8XvrsTO", "viki", "ampova", Role.ROLE_ADMIN);
 
         //subscriptions
-        this.subscriptionService.save("Monthly Plan", "Enjoy online cinema everywhere for a monthly price of 10$", 10.0, "/images/1m.png");
-        this.subscriptionService.save("Annual Plan", "Enjoy online cinema everywhere for an annual price of 100$", 100.0, "/images/12m.png");
+        this.subscriptionService.save("Monthly Plan", "Enjoy online cinema everywhere for a monthly price of 10$", 10.0);
+        this.subscriptionService.save("Annual Plan", "Enjoy online cinema everywhere for an annual price of 100$", 100.0);
         List<Subscription> subscriptions = this.subscriptionService.findAll();
 
         this.discountService.create(LocalDate.of(2022, 11, 25), "Discount 1", 50.0 );
