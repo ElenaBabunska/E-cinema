@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
     tools{
         maven 'maven_3_8_1'
@@ -6,8 +6,8 @@ pipeline{
     stages{
         stage('Build Maven'){
             steps{
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ElenaBabunska/E-cinema']]])
-            sh 'mvn clean install'
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ElenaBabunska/E-cinema']])
+                sh 'mvn clean install'
             }
         }
         stage('Build docker image'){
@@ -27,8 +27,6 @@ pipeline{
                 }
             }
         }
-
-
 
     }
 }
