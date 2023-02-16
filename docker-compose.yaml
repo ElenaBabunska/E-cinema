@@ -20,7 +20,6 @@ services:
       dockerfile: Dockerfile
     environment:
       SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
-#      jdbc:postresql://postgres:5432/e-cinema
     ports:
       - "8080:8080"
 volumes:
