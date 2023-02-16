@@ -1,0 +1,28 @@
+version: '3'
+services:
+  database:
+    container_name: e-cinema_database
+    image: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=e-cinema
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5454:5432
+  e-cinema:
+    depends_on:
+      - database
+    image: e-cinema.jar
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
+#      jdbc:postresql://postgres:5432/e-cinema
+    ports:
+      - "8080:8080"
+volumes:
+  postgres-data:
+    driver: local
